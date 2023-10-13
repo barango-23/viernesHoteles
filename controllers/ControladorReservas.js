@@ -2,24 +2,68 @@ export class ControladorReservas {
   constructor() {}
 
   buscarTodas(request, response) {
-  try {
-  } catch (error) {}  
+    try {
+      response.status(200).json({
+        mensaje: "exito buscando todas las reservas",
+        datos: "aca los datos",
+      });
+    } catch (error) {
+      response.status(400).json({
+        mensaje: "fallamos" + error,
+      });
+    }
   }
   buscarPorId(request, response) {
     try {
-    } catch (error) {}
+      let id = request.params.id;
+      response.status(200).json({
+        mensaje: "exito buscando las reservas por id",
+        datos: "aca los datos",
+      });
+    } catch (error) {
+      response.status(400).json({
+        mensaje: "fallamos" + error,
+      });
+    }
   }
-  
-  modificarReserva(request, response) {
+  modificar(request, response) {
     try {
-    } catch (error) {}
+      let id = request.params.id;
+      let datos = request.body;
+      response.status(200).json({
+        mensaje: "exito modificando las reservas",
+        datos: "aca los datos",
+      });
+    } catch (error) {
+      response.status(400).json({
+        mensaje: "fallamos" + error,
+      });
+    }
   }
-  registrarReserva(request, response) {
+  registrar(request, response) {
     try {
-    } catch (error) {}
+      let datos = request.body;
+      response.status(200).json({
+        mensaje: "exito registrando las reservas ",
+        datos: "aca los datos",
+      });
+    } catch (error) {
+      response.status(400).json({
+        mensaje: "fallamos" + error,
+      });
+    }
   }
-  eliminarReserva(request, response) {
+  eliminar(request, response) {
     try {
-    } catch (error) {}
+      let id = request.params.id;
+      response.status(200).json({
+        mensaje: "exito eliminando las reservas",
+        datos: "aca los datos",
+      });
+    } catch (error) {
+      response.status(400).json({
+        mensaje: "fallamos" + error,
+      });
+    }
   }
 }
