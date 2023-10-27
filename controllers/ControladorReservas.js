@@ -1,4 +1,4 @@
-import { ServicioReservas } from "../services/ServicioReservas";
+import { ServicioReservas } from "../services/ServicioReservas.js";
 
 export class ControladorReservas {
   constructor() {}
@@ -58,7 +58,7 @@ async  modificar(request, response) {
   
       response.status(200).json({
         mensaje: "Éxito registrando la reserva",
-        datos: "aca los datos",
+        datos:datos
       });
     } catch (error) {
       response.status(400).json({
@@ -74,7 +74,7 @@ async  modificar(request, response) {
       await servicioReservas.eliminar(id)
       response.status(200).json({
         mensaje: "exito eliminando las reservas",
-        datos: "aca los datos",
+        datos:id
       });
     } catch (error) {
       response.status(400).json({

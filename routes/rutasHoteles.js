@@ -2,6 +2,7 @@ import express from "express";
 import { ControladorReservas } from "../controllers/ControladorReservas.js";
 import { ControladorHabitacion } from "../controllers/ControladorHabitacion.js";
 
+
 let controladorHabitacion = new ControladorHabitacion();
 export let rutasAPI = express.Router();
 //ACA PONE SUS ENDPOINTS

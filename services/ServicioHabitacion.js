@@ -1,4 +1,4 @@
-import { ModeloHabitacion } from "../models/ModeloHabitacion"
+import { ModeloHabitacion } from "../models/ModeloHabitacion.js"
 export class ServicioHabitacion{
     constructor(){}
   async buscarTodas(){

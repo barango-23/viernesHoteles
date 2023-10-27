@@ -1,4 +1,4 @@
-import { ServicioHabitacion } from "../services/ServicioHabitacion";
+import { ServicioHabitacion } from "../services/ServicioHabitacion.js";
 export class ControladorHabitacion {
   constructor() {}
 
@@ -57,10 +57,10 @@ export class ControladorHabitacion {
     try {
       let servicioHabitacion=new ServicioHabitacion()
       let datos = request.body;
-      //await servicioHabitacion.registrar(datos)
+      await servicioHabitacion.registrar(datos)
       response.status(200).json({
         mensaje: "exito registrando las habitaciones",
-        datos:datos.precio_noche,
+        datos:datos
       });
     } catch (error) {
       response.status(400).json({

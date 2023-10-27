@@ -1,4 +1,4 @@
-import { ModeloReservas } from "../models/ModeloReserva";
+import { ModeloReservas } from "../models/ModeloReserva.js";
 export class ServicioReservas{
     constructor(){}
   async buscarTodas(){

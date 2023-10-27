@@ -12,12 +12,12 @@ const Reserva=new Schema({
         required:true
     },
     Numero:{
-        Type:Number,
+        type:Number,
         required:true
     },
     Fecha_inicio :{
         type:Date,
-        required
+        required:true
     },
     Fecha_Final :{
         type:Date,
