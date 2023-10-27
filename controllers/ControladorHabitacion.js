@@ -1,11 +1,13 @@
+import { ServicioHabitacion } from "../services/ServicioHabitacion";
 export class ControladorHabitacion {
   constructor() {}
 
-  buscarTodas(request, response) {
+  async buscarTodas(request, response) {
     try {
+      let servicioHabitacion=new ServicioHabitacion()
       response.status(200).json({
         mensaje: "exito buscando todas las habitaciones",
-        datos: "aca los datos",
+        datos:await servicioHabitacion.buscarTodas()
       });
     } catch (error) {
       response.status(400).json({
@@ -13,12 +15,13 @@ export class ControladorHabitacion {
       });
     }
   }
-  buscarPorId(request, response) {
+  async buscarPorId(request, response) {
     try {
+      let servicioHabitacion=new ServicioHabitacion()
       let id = request.params.id;
       response.status(200).json({
         mensaje: "exito buscando los datos por id",
-        datos: "aca los datos",
+        datos:await servicioHabitacion.buscarPorId()
       });
     } catch (error) {
       response.status(400).json({
@@ -26,26 +29,38 @@ export class ControladorHabitacion {
       });
     }
   }
-  modificar(request, response) {
+  async modificar(request, response) {
     try {
+      let servicioHabitacion = new ServicioHabitacion();
       let id = request.params.id;
       let datos = request.body;
-      response.status(200).json({
-        mensaje: "exito modificando las habitaciones",
-        datos: "aca los datos",
-      });
+      const habitacionModificada = await servicioHabitacion.modificar(id, datos);
+  
+      if (habitacionModificada) {
+        response.status(200).json({
+          mensaje: "Éxito modificando la habitación",
+          datos: habitacionModificada, 
+        });
+      } else {
+        response.status(404).json({
+          mensaje: "No se encontró la habitación con el ID proporcionado", 
+        });
+      }
     } catch (error) {
-      response.status(400).json({
-        mensaje: "fallamos" + error,
+      response.status(500).json({
+        mensaje: "Error al modificar la habitación: " + error.message,
       });
     }
   }
-  registrar(request, response) {
+  
+ async registrar(request, response) {
     try {
+      let servicioHabitacion=new ServicioHabitacion()
       let datos = request.body;
+      //await servicioHabitacion.registrar(datos)
       response.status(200).json({
         mensaje: "exito registrando las habitaciones",
-        datos: "aca los datos",
+        datos:datos.precio_noche,
       });
     } catch (error) {
       response.status(400).json({
@@ -53,9 +68,11 @@ export class ControladorHabitacion {
       });
     }
   }
-  eliminar(request, response) {
+ async eliminar(request, response) {
     try {
+      let servicioHabitacion=new ServicioHabitacion()
       let id = request.params.id;
+      await servicioHabitacion.eliminar(id)
       response.status(200).json({
         mensaje: "exito eliminando las habitaciones",
         datos: "aca los datos",

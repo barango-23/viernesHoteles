@@ -1,11 +1,14 @@
+import { ServicioReservas } from "../services/ServicioReservas";
+
 export class ControladorReservas {
   constructor() {}
 
-  buscarTodas(request, response) {
+ async buscarTodas(request, response) {
     try {
+      let servicioReservas=new ServicioReservas()
       response.status(200).json({
         mensaje: "exito buscando todas las reservas",
-        datos: "aca los datos",
+        datos:await servicioReservas.buscarTodas() 
       });
     } catch (error) {
       response.status(400).json({
@@ -13,12 +16,13 @@ export class ControladorReservas {
       });
     }
   }
-  buscarPorId(request, response) {
+async  buscarPorId(request, response) {
     try {
+      let servicioReservas=new ServicioReservas()
       let id = request.params.id;
       response.status(200).json({
         mensaje: "exito buscando las reservas por id",
-        datos: "aca los datos",
+        datos:await servicioReservas.buscarPorId()
       });
     } catch (error) {
       response.status(400).json({
@@ -26,10 +30,12 @@ export class ControladorReservas {
       });
     }
   }
-  modificar(request, response) {
+async  modificar(request, response) {
     try {
+      let servicioReservas=new ServicioReservas()
       let id = request.params.id;
       let datos = request.body;
+      await servicioReservas.modificar(id,datos)
       response.status(200).json({
         mensaje: "exito modificando las reservas",
         datos: "aca los datos",
@@ -40,22 +46,32 @@ export class ControladorReservas {
       });
     }
   }
-  registrar(request, response) {
+  async registrar(request, response) {
     try {
+      let servicioReservas = new ServicioReservas();
       let datos = request.body;
+      const fechaInicio = new Date(datos.Fecha_inicio);
+      const fechaFinal = new Date(datos.Fecha_Final);
+      const diferenciaDias = Math.ceil((fechaFinal - fechaInicio) / (1000 * 60 * 60 * 24)); 
+      datos.DiferenciaDias = diferenciaDias;
+      await servicioReservas.registrar(datos);
+  
       response.status(200).json({
-        mensaje: "exito registrando las reservas ",
+        mensaje: "Éxito registrando la reserva",
         datos: "aca los datos",
       });
     } catch (error) {
       response.status(400).json({
-        mensaje: "fallamos" + error,
+        mensaje: "Fallamos: " + error,
       });
     }
   }
-  eliminar(request, response) {
+  
+ async eliminar(request, response) {
     try {
+      let servicioReservas=new ServicioReservas()
       let id = request.params.id;
+      await servicioReservas.eliminar(id)
       response.status(200).json({
         mensaje: "exito eliminando las reservas",
         datos: "aca los datos",
